@@ -5,48 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hop Town – Cervezas Artesanales · Barcelona</title>
 <meta name="description" content="Bar de cervezas artesanales en el Eixample de Barcelona. 20+ estilos en grifo, tapas caseras, terraza y los mejores partidos en pantalla. C. de Sicília, 181, Local 3.">
-<meta name="theme-color" content="#0F0D0B">
+<meta name="theme-color" content="#013614">
 <meta property="og:title" content="Hop Town – Bar de Cervezas Artesanales · Barcelona">
 <meta property="og:description" content="Cerveza artesanal de verdad, tapas caseras y ambiente para ver el deporte. Eixample, Barcelona. ☎ +34 692 07 33 23">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍺</text></svg>">
+<link rel="icon" href="assets/images/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 
-/* ══ TOKENS ═══════════════════════════════════════════════════════════ */
+/* ══ TOKENS — verde bosque profundo ══════════════════════════════════ */
 :root {
-  --bg:         #F5F0E8;
-  --surface:    #ECE6D8;
-  --surface2:   #E3DDD0;
-  --border:     #CFC9BC;
-  --text:       #1A1714;
-  --muted:      #6B655C;
-  --faint:      #9A948C;
-  --accent:     #B5832E;
-  --accenthi:   #C9943A;
-  --hop:        #3D6130;
-  --hophi:      #4D7A3C;
-  --nav-h:      68px;
-  --sy:         clamp(4.5rem,10vw,7rem);
-  --r:          4px;
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg:       #0F0D0B; --surface:  #1C1915; --surface2: #252019;
-    --border:   #2E2A24; --text:     #E8E2D6; --muted:    #8C8478;
-    --faint:    #5C5650; --accent:   #C9943A; --accenthi: #D4A84F;
-    --hop:      #4D7A3C; --hophi:    #5E9049;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg:       #0F0D0B; --surface:  #1C1915; --surface2: #252019;
-  --border:   #2E2A24; --text:     #E8E2D6; --muted:    #8C8478;
-  --faint:    #5C5650; --accent:   #C9943A; --accenthi: #D4A84F;
-  --hop:      #4D7A3C; --hophi:    #5E9049;
+  --bg:       #013614;
+  --surface:  #024A1C;
+  --surface2: #025820;
+  --border:   #0B6830;
+  --text:     #E8F0EA;
+  --muted:    #7AAF86;
+  --faint:    #3E6C4A;
+  --accent:   #C9943A;
+  --accenthi: #D4A84F;
+  --hop:      #5DC86E;
+  --hophi:    #72D980;
+  --ev-bg:    #010D06;
+  --ft-bg:    #010A04;
+  --nav-h:    68px;
+  --sy:       clamp(4.5rem,10vw,7rem);
+  --r:        4px;
   color-scheme: dark;
 }
 
@@ -57,6 +43,7 @@ body{background:var(--bg);color:var(--text);font-family:'Lora',Georgia,serif;lin
 img{max-width:100%;display:block}
 a{color:inherit}
 button{cursor:pointer;font-family:inherit}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* ══ SHARED ══════════════════════════════════════════════════════════ */
 .wrap{max-width:1200px;margin-inline:auto;padding-inline:clamp(1.5rem,5vw,3.5rem)}
@@ -64,11 +51,12 @@ section{padding-block:var(--sy)}
 
 .eyebrow{font-family:'Barlow',sans-serif;font-weight:500;font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
 .eyebrow::before{content:'';display:block;width:2rem;height:1px;background:var(--accent);flex-shrink:0}
+.eyebrow.center{justify-content:center}
+.eyebrow.center::before{display:none}
 
 .stitle{font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:clamp(2.25rem,6vw,3.75rem);line-height:.92;letter-spacing:-.01em;text-wrap:balance;margin-bottom:1.25rem}
 .ssub{font-family:'Lora',serif;font-size:1.0625rem;font-style:italic;color:var(--muted);line-height:1.55}
 
-/* Scroll anim */
 [data-a]{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
 [data-a].in{opacity:1;transform:none}
 [data-a][data-d="1"]{transition-delay:.1s}
@@ -77,56 +65,70 @@ section{padding-block:var(--sy)}
 [data-a][data-d="4"]{transition-delay:.4s}
 @media(prefers-reduced-motion:reduce){[data-a]{opacity:1;transform:none;transition:none}}
 
-/* Buttons */
 .btn{display:inline-block;font-family:'Barlow',sans-serif;font-weight:600;font-size:.875rem;letter-spacing:.08em;text-transform:uppercase;padding:.9em 2.2em;border-radius:var(--r);text-decoration:none;transition:background .2s,color .2s,border-color .2s,transform .12s;outline-offset:3px}
 .btn:focus-visible{outline:2px solid var(--accent)}
 .btn:hover{transform:translateY(-2px)}
-.btn-amber{background:var(--accent);color:#0F0D0B}.btn-amber:hover{background:var(--accenthi)}
+.btn-amber{background:var(--accent);color:#010D06}.btn-amber:hover{background:var(--accenthi)}
 .btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
-.btn-white{background:#F5F0E8;color:#0F0D0B}.btn-white:hover{background:#fff}
+.btn-white{background:#E8F0EA;color:#010D06}.btn-white:hover{background:#fff}
 
 /* ══ HEADER ══════════════════════════════════════════════════════════ */
 .site-header{position:fixed;inset:0 0 auto 0;height:var(--nav-h);z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,5vw,3.5rem);border-bottom:1px solid transparent;transition:background .35s,border-color .35s,backdrop-filter .35s}
-.site-header.scrolled{background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:var(--border)}
-.logo{font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:1.375rem;letter-spacing:.06em;color:var(--text);text-decoration:none}
-.logo .dot{color:var(--accent)}
+.site-header.scrolled{background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:var(--border)}
+
+.logo{display:flex;align-items:center;gap:.75rem;text-decoration:none}
+.logo-img{height:44px;width:44px;border-radius:50%;object-fit:cover;transition:transform .3s}
+.logo:hover .logo-img{transform:rotate(8deg) scale(1.05)}
+.logo-name{font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:1.25rem;letter-spacing:.06em;color:var(--text)}
+.logo-name .dot{color:var(--accent)}
+
 .site-nav{display:flex;align-items:center;gap:2.25rem}
 .site-nav a{font-family:'Barlow',sans-serif;font-weight:500;font-size:.8125rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
 .site-nav a:hover,.site-nav a:focus-visible{color:var(--text)}
-.nav-cta{font-family:'Barlow',sans-serif;font-weight:600;font-size:.8125rem;letter-spacing:.1em;text-transform:uppercase;padding:.6em 1.5em;background:var(--accent);color:#0F0D0B;text-decoration:none;border-radius:var(--r);transition:background .2s,transform .12s}
+.nav-cta{font-family:'Barlow',sans-serif;font-weight:600;font-size:.8125rem;letter-spacing:.1em;text-transform:uppercase;padding:.6em 1.5em;background:var(--accent);color:#010D06;text-decoration:none;border-radius:var(--r);transition:background .2s,transform .12s}
 .nav-cta:hover{background:var(--accenthi);transform:translateY(-1px)}
 .hamburger{display:none;background:none;border:none;padding:.25rem;color:var(--text);flex-direction:column;gap:5px}
 .hamburger span{display:block;width:24px;height:1.5px;background:currentColor;transition:transform .25s,opacity .25s}
 
 /* ══ MOBILE NAV ══════════════════════════════════════════════════════ */
-.mnav{position:fixed;inset:0;z-index:99;background:var(--bg);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2rem;opacity:0;pointer-events:none;transition:opacity .3s}
+.mnav{position:fixed;inset:0;z-index:99;background:var(--bg);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1.75rem;opacity:0;pointer-events:none;transition:opacity .3s}
 .mnav.open{opacity:1;pointer-events:all}
-.mnav a{font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:2.25rem;letter-spacing:.04em;color:var(--text);text-decoration:none;text-transform:uppercase;transition:color .2s}
+.mnav-logo{width:90px;height:90px;border-radius:50%;object-fit:cover;margin-bottom:.5rem}
+.mnav a{font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:2rem;letter-spacing:.04em;color:var(--text);text-decoration:none;text-transform:uppercase;transition:color .2s}
 .mnav a:hover{color:var(--accent)}
-.mnav .nav-cta{font-size:1rem;margin-top:.5rem;display:inline-block}
+.mnav .nav-cta{font-size:.9rem;margin-top:.5rem;display:inline-block}
 
 /* ══ HERO ════════════════════════════════════════════════════════════ */
-.hero{position:relative;min-height:100svh;display:grid;grid-template-rows:1fr auto;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 20% 70%,color-mix(in srgb,var(--accent) 14%,transparent),transparent),radial-gradient(ellipse 50% 50% at 85% 25%,color-mix(in srgb,var(--hop) 8%,transparent),transparent);pointer-events:none}
+.hero{position:relative;min-height:100svh;display:grid;grid-template-rows:1fr auto;overflow:hidden;background:var(--bg)}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 55% at 50% 38%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 70%),radial-gradient(ellipse 40% 35% at 15% 80%,color-mix(in srgb,var(--hop) 8%,transparent),transparent 60%),radial-gradient(ellipse 35% 30% at 85% 75%,color-mix(in srgb,var(--accent) 6%,transparent),transparent 60%);pointer-events:none}
 #hero-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.hero-main{position:relative;z-index:2;display:flex;align-items:flex-end;padding:calc(var(--nav-h) + 3rem) clamp(1.5rem,5vw,3.5rem) 3rem}
-.hero-content{max-width:860px}
-.hero-eyebrow{font-family:'Barlow',sans-serif;font-weight:500;font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem}
-.hero-eyebrow::before{content:'';display:block;width:2rem;height:1px;background:var(--accent);flex-shrink:0}
-.hero-title{font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:clamp(5.5rem,17vw,15rem);line-height:.86;letter-spacing:-.01em;color:var(--text);margin-bottom:1.75rem}
-.hero-title .acc{color:var(--accent);display:block}
-.hero-tag{font-family:'Lora',serif;font-size:clamp(1.125rem,2.2vw,1.4375rem);font-style:italic;color:var(--muted);margin-bottom:.875rem;max-width:500px}
-.hero-desc{font-family:'Barlow',sans-serif;font-size:.9375rem;color:var(--muted);line-height:1.65;max-width:460px;margin-bottom:2.5rem}
-.hero-actions{display:flex;gap:.875rem;flex-wrap:wrap}
-.hero-stats{position:relative;z-index:2;display:flex;gap:clamp(2rem,7vw,5rem);flex-wrap:wrap;padding:1.75rem clamp(1.5rem,5vw,3.5rem);border-top:1px solid var(--border);background:color-mix(in srgb,var(--bg) 60%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.stat{display:flex;flex-direction:column;gap:.2rem}
+
+/* Logo hero centrado */
+.hero-center{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(var(--nav-h) + 2.5rem) clamp(1.5rem,5vw,3.5rem) 2.5rem;gap:2.5rem}
+
+.hero-logo-wrap{position:relative;display:flex;align-items:center;justify-content:center}
+.hero-logo-glow{position:absolute;width:140%;height:140%;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--accent) 22%,transparent) 0%,transparent 70%);animation:glow-pulse 3.5s ease-in-out infinite}
+.hero-logo-img{position:relative;z-index:1;width:clamp(180px,30vw,300px);height:clamp(180px,30vw,300px);border-radius:50%;object-fit:cover;filter:drop-shadow(0 12px 48px color-mix(in srgb,var(--accent) 35%,transparent)) drop-shadow(0 4px 16px rgba(0,0,0,.5));animation:logo-float 5s ease-in-out infinite}
+
+@keyframes logo-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes glow-pulse{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.1)}}
+@media(prefers-reduced-motion:reduce){.hero-logo-img,.hero-logo-glow{animation:none}}
+
+.hero-text{max-width:620px}
+.hero-eyebrow{font-family:'Barlow',sans-serif;font-weight:500;font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;justify-content:center;gap:.75rem;margin-bottom:1.25rem}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';display:block;width:1.5rem;height:1px;background:var(--accent);flex-shrink:0}
+
+h1.hero-title{font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:clamp(2rem,5vw,3.5rem);line-height:1;letter-spacing:-.01em;color:var(--text);margin-bottom:1rem;text-wrap:balance}
+h1.hero-title em{font-style:italic;color:var(--accent)}
+
+.hero-desc{font-family:'Barlow',sans-serif;font-size:1rem;color:var(--muted);line-height:1.65;max-width:480px;margin:0 auto 2rem}
+.hero-actions{display:flex;gap:.875rem;flex-wrap:wrap;justify-content:center}
+
+/* Stats strip */
+.hero-stats{position:relative;z-index:2;display:flex;gap:clamp(2rem,7vw,5rem);flex-wrap:wrap;justify-content:center;padding:1.75rem clamp(1.5rem,5vw,3.5rem);border-top:1px solid var(--border);background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.stat{display:flex;flex-direction:column;align-items:center;gap:.2rem}
 .stat-n{font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:clamp(1.75rem,3.5vw,2.625rem);color:var(--accent);line-height:1;font-variant-numeric:tabular-nums}
 .stat-l{font-family:'Barlow',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.scroll-hint{position:absolute;right:clamp(1.5rem,5vw,3.5rem);bottom:6rem;z-index:3;display:flex;flex-direction:column;align-items:center;gap:.6rem}
-.scroll-hint span{font-family:'Barlow',sans-serif;font-size:.625rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;opacity:.5}
-.scroll-line{width:1px;height:3.5rem;background:linear-gradient(to bottom,var(--accent),transparent);transform-origin:top;animation:sdrop 2s ease-in-out infinite}
-@keyframes sdrop{0%{transform:scaleY(0);opacity:0}30%{opacity:1}70%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);transform-origin:bottom;opacity:0}}
-@media(prefers-reduced-motion:reduce){.scroll-line{animation:none;opacity:.3}}
 
 /* ══ SOBRE NOSOTROS ══════════════════════════════════════════════════ */
 #nosotros{background:var(--surface)}
@@ -165,24 +167,24 @@ section{padding-block:var(--sy)}
 .carta-note{font-family:'Barlow',sans-serif;font-size:.875rem;color:var(--faint);margin-top:2rem;text-align:center}
 
 /* ══ EVENTOS ═════════════════════════════════════════════════════════ */
-#eventos{background:#0F0D0B;color:#E8E2D6;padding-block:var(--sy)}
+#eventos{background:var(--ev-bg);color:#E8F0EA;padding-block:var(--sy)}
 .ev-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:center}
-.ev-eyebrow{font-family:'Barlow',sans-serif;font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:#C9943A;display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
-.ev-eyebrow::before{content:'';display:block;width:2rem;height:1px;background:#C9943A;flex-shrink:0}
-.ev-title{font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:clamp(2.5rem,6vw,4.5rem);line-height:.9;letter-spacing:-.01em;text-wrap:balance;margin-bottom:1.5rem;color:#E8E2D6}
-.ev-title em{font-style:normal;color:#C9943A}
-.ev-body{font-family:'Barlow',sans-serif;font-size:1rem;color:#8C8478;line-height:1.65;margin-bottom:2rem}
+.ev-eyebrow{font-family:'Barlow',sans-serif;font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
+.ev-eyebrow::before{content:'';display:block;width:2rem;height:1px;background:var(--accent);flex-shrink:0}
+.ev-title{font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:clamp(2.5rem,6vw,4.5rem);line-height:.9;letter-spacing:-.01em;text-wrap:balance;margin-bottom:1.5rem;color:#E8F0EA}
+.ev-title em{font-style:normal;color:var(--accent)}
+.ev-body{font-family:'Barlow',sans-serif;font-size:1rem;color:#5A8A66;line-height:1.65;margin-bottom:2rem}
 .sport-pills{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:2.5rem}
-.sport-pill{display:flex;align-items:center;gap:.5rem;padding:.5em 1em;border:1px solid #2E2A24;border-radius:99px;font-family:'Barlow',sans-serif;font-size:.875rem;font-weight:500;color:#8C8478}
-.sport-pill svg{width:16px;height:16px;stroke:#C9943A;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sport-pill{display:flex;align-items:center;gap:.5rem;padding:.5em 1em;border:1px solid #0B3018;border-radius:99px;font-family:'Barlow',sans-serif;font-size:.875rem;font-weight:500;color:#5A8A66}
+.sport-pill svg{width:16px;height:16px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .screens{display:flex;gap:2rem;align-items:flex-end}
 .screen-wrap{display:flex;flex-direction:column;flex:1}
 .screen-wrap:first-child{transform:scale(.88);transform-origin:bottom center}
-.screen-box{background:#1C1915;border:2px solid #2E2A24;border-radius:6px 6px 0 0;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.screen-box::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(201,148,58,.07),transparent 60%),radial-gradient(ellipse at 70% 70%,rgba(77,122,60,.05),transparent 50%)}
-.screen-lbl{font-family:'Big Shoulders Display',sans-serif;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#3A3530;position:relative;z-index:1}
-.screen-stand{width:28%;height:6px;background:#2E2A24;margin:0 auto}
-.screen-foot{width:48%;height:4px;background:#252019;margin:0 auto;border-radius:0 0 4px 4px}
+.screen-box{background:#020F07;border:2px solid #0B3018;border-radius:6px 6px 0 0;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.screen-box::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(201,148,58,.07),transparent 60%),radial-gradient(ellipse at 70% 70%,rgba(93,200,110,.05),transparent 50%)}
+.screen-lbl{font-family:'Big Shoulders Display',sans-serif;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#1A3A22;position:relative;z-index:1}
+.screen-stand{width:28%;height:6px;background:#0B3018;margin:0 auto}
+.screen-foot{width:48%;height:4px;background:#020F07;margin:0 auto;border-radius:0 0 4px 4px}
 
 /* ══ RESEÑAS ═════════════════════════════════════════════════════════ */
 #resenas{background:var(--surface)}
@@ -205,7 +207,7 @@ section{padding-block:var(--sy)}
 .ubi-grid{display:grid;grid-template-columns:3fr 2fr;gap:3.5rem;align-items:start}
 .map-wrap{border-radius:var(--r);overflow:hidden;border:1px solid var(--border);height:440px}
 .map-wrap iframe{width:100%;height:100%;border:none;display:block}
-.map-wrap noscript a,.map-link{display:flex;align-items:center;gap:.5rem;font-family:'Barlow',sans-serif;font-size:.875rem;color:var(--muted);text-decoration:none;margin-top:.75rem;transition:color .2s}
+.map-link{display:flex;align-items:center;gap:.5rem;font-family:'Barlow',sans-serif;font-size:.875rem;color:var(--muted);text-decoration:none;margin-top:.75rem;transition:color .2s}
 .map-link:hover{color:var(--accent)}
 .map-link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
 .info-block{padding-block:1.25rem;border-bottom:1px solid var(--border)}
@@ -220,30 +222,32 @@ section{padding-block:var(--sy)}
 .horario tr.hoy td{color:var(--accent) !important;font-weight:600}
 
 /* ══ FOOTER ══════════════════════════════════════════════════════════ */
-footer{background:#0F0D0B;color:#E8E2D6;padding-block:4rem 2rem}
-.ft-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;padding-bottom:2.5rem;border-bottom:1px solid #2E2A24;margin-bottom:2rem}
-.ft-logo{font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:1.5rem;letter-spacing:.06em;color:#E8E2D6;text-decoration:none;display:inline-block;margin-bottom:.875rem}
-.ft-logo .dot{color:#C9943A}
-.ft-tag{font-family:'Lora',serif;font-style:italic;font-size:.9375rem;color:#8C8478;line-height:1.55;margin-bottom:1.5rem;max-width:230px}
+footer{background:var(--ft-bg);color:#E8F0EA;padding-block:4rem 2rem}
+.ft-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;padding-bottom:2.5rem;border-bottom:1px solid #0B3018;margin-bottom:2rem}
+.ft-logo{display:flex;align-items:center;gap:.625rem;text-decoration:none;margin-bottom:.875rem}
+.ft-logo-img{height:40px;width:40px;border-radius:50%;object-fit:cover}
+.ft-logo-name{font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:1.375rem;letter-spacing:.06em;color:#E8F0EA}
+.ft-logo-name .dot{color:var(--accent)}
+.ft-tag{font-family:'Lora',serif;font-style:italic;font-size:.9375rem;color:#3D6A48;line-height:1.55;margin-bottom:1.5rem;max-width:230px}
 .social{display:flex;gap:.75rem}
-.soc{width:36px;height:36px;border:1px solid #2E2A24;border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:#8C8478;text-decoration:none;transition:border-color .2s,color .2s}
-.soc:hover{border-color:#C9943A;color:#C9943A}
+.soc{width:36px;height:36px;border:1px solid #0B3018;border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:#3D6A48;text-decoration:none;transition:border-color .2s,color .2s}
+.soc:hover{border-color:var(--accent);color:var(--accent)}
 .soc svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.ft-col-t{font-family:'Barlow',sans-serif;font-size:.6875rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#C9943A;margin-bottom:1.25rem}
+.ft-col-t{font-family:'Barlow',sans-serif;font-size:.6875rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:1.25rem}
 .ft-links{list-style:none;display:flex;flex-direction:column;gap:.6rem}
-.ft-links a{font-family:'Barlow',sans-serif;font-size:.9375rem;color:#8C8478;text-decoration:none;transition:color .2s}
-.ft-links a:hover{color:#E8E2D6}
-.ft-hours{font-family:'Barlow',sans-serif;font-size:.875rem;color:#8C8478;line-height:1.85}
+.ft-links a{font-family:'Barlow',sans-serif;font-size:.9375rem;color:#3D6A48;text-decoration:none;transition:color .2s}
+.ft-links a:hover{color:#E8F0EA}
+.ft-hours{font-family:'Barlow',sans-serif;font-size:.875rem;color:#3D6A48;line-height:1.85}
 .ft-contact{display:flex;flex-direction:column;gap:.875rem}
-.ft-contact a{font-family:'Barlow',sans-serif;font-size:.9375rem;color:#8C8478;text-decoration:none;display:flex;align-items:center;gap:.5rem;transition:color .2s}
-.ft-contact a:hover{color:#E8E2D6}
+.ft-contact a{font-family:'Barlow',sans-serif;font-size:.9375rem;color:#3D6A48;text-decoration:none;display:flex;align-items:center;gap:.5rem;transition:color .2s}
+.ft-contact a:hover{color:#E8F0EA}
 .ft-contact svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 .ft-bottom{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
-.ft-copy,.ft-rating{font-family:'Barlow',sans-serif;font-size:.8125rem;color:#5C5650}
-.ft-rating strong{color:#C9943A}
+.ft-copy,.ft-rating{font-family:'Barlow',sans-serif;font-size:.8125rem;color:#1E4A28}
+.ft-rating strong{color:var(--accent)}
 
 /* ══ FLOATING CTA ════════════════════════════════════════════════════ */
-.wa-btn{position:fixed;bottom:1.75rem;right:1.75rem;z-index:50;display:flex;align-items:center;gap:.625rem;background:#25D366;color:#fff;text-decoration:none;padding:.8rem 1.25rem;border-radius:99px;font-family:'Barlow',sans-serif;font-weight:600;font-size:.875rem;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .2s,box-shadow .2s}
+.wa-btn{position:fixed;bottom:1.75rem;right:1.75rem;z-index:50;display:flex;align-items:center;gap:.625rem;background:#25D366;color:#fff;text-decoration:none;padding:.8rem 1.25rem;border-radius:99px;font-family:'Barlow',sans-serif;font-weight:600;font-size:.875rem;box-shadow:0 4px 20px rgba(37,211,102,.35);transition:transform .2s,box-shadow .2s}
 .wa-btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 8px 28px rgba(37,211,102,.5)}
 .wa-btn svg{width:20px;height:20px;fill:currentColor;flex-shrink:0}
 .wa-btn span{white-space:nowrap}
@@ -253,15 +257,13 @@ footer{background:#0F0D0B;color:#E8E2D6;padding-block:4rem 2rem}
   .site-nav,.nav-cta{display:none}
   .hamburger{display:flex}
   .about-grid,.ev-grid,.ubi-grid{grid-template-columns:1fr;gap:3rem}
-  .screens{justify-content:center}
   .ft-grid{grid-template-columns:1fr 1fr}
   .hero-stats{flex-wrap:wrap}
-  .scroll-hint{display:none}
   .resenas-top{flex-direction:column;align-items:flex-start}
+  .carta-head{flex-direction:column;align-items:flex-start}
 }
 @media(max-width:480px){
   .ft-grid{grid-template-columns:1fr}
-  .hero-stats .stat:nth-child(n+3){display:none}
   .wa-btn span{display:none}
   .wa-btn{padding:.9rem}
 }
@@ -272,24 +274,28 @@ footer{background:#0F0D0B;color:#E8E2D6;padding-block:4rem 2rem}
 
 <!-- ░░ WHATSAPP ░░ -->
 <a href="https://wa.me/34692073323" class="wa-btn" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.523 5.843L.057 23.215a.75.75 0 0 0 .928.928l5.372-1.466A11.942 11.942 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.73 9.73 0 0 1-4.952-1.352l-.355-.212-3.686 1.006 1.006-3.687-.213-.354A9.73 9.73 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.523 5.843L.057 23.215a.75.75 0 0 0 .928.928l5.372-1.466A11.942 11.942 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
   <span>Escríbenos</span>
 </a>
 
 <!-- ░░ MOBILE NAV ░░ -->
 <div class="mnav" id="mnav" aria-hidden="true">
-  <a href="#inicio"   onclick="closeNav()">Inicio</a>
-  <a href="#nosotros" onclick="closeNav()">Sobre nosotros</a>
-  <a href="#carta"    onclick="closeNav()">Carta</a>
-  <a href="#eventos"  onclick="closeNav()">Eventos</a>
+  <img src="assets/images/logo.png" alt="Hop Town" class="mnav-logo">
+  <a href="#inicio"    onclick="closeNav()">Inicio</a>
+  <a href="#nosotros"  onclick="closeNav()">Sobre nosotros</a>
+  <a href="#carta"     onclick="closeNav()">Carta</a>
+  <a href="#eventos"   onclick="closeNav()">Eventos</a>
   <a href="#ubicacion" onclick="closeNav()">Ubicación</a>
-  <a href="#contacto" onclick="closeNav()">Contacto</a>
+  <a href="#contacto"  onclick="closeNav()">Contacto</a>
   <a href="https://wa.me/34692073323" class="nav-cta" target="_blank" rel="noopener" onclick="closeNav()">Reservar</a>
 </div>
 
 <!-- ░░ HEADER ░░ -->
 <header class="site-header" id="hdr">
-  <a href="#inicio" class="logo">HOP<span class="dot">.</span>TOWN</a>
+  <a href="#inicio" class="logo">
+    <img src="assets/images/logo.png" alt="Hop Town" class="logo-img">
+    <span class="logo-name">HOP<span class="dot">.</span>TOWN</span>
+  </a>
   <nav class="site-nav" aria-label="Principal">
     <a href="#inicio">Inicio</a>
     <a href="#nosotros">Sobre nosotros</a>
@@ -307,18 +313,30 @@ footer{background:#0F0D0B;color:#E8E2D6;padding-block:4rem 2rem}
 <!-- ░░ HERO ░░ -->
 <section class="hero" id="inicio" aria-label="Inicio">
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
-  <div class="hero-main">
-    <div class="hero-content">
+
+  <div class="hero-center">
+    <!-- Logo principal -->
+    <div class="hero-logo-wrap" data-a>
+      <div class="hero-logo-glow" aria-hidden="true"></div>
+      <img
+        src="assets/images/logo.png"
+        alt="Hop Town – Bar de Cervezas Artesanales, Barcelona"
+        class="hero-logo-img">
+    </div>
+
+    <!-- Texto -->
+    <div class="hero-text" data-a data-d="2">
       <p class="hero-eyebrow">Bar &amp; Cervecería artesanal · Eixample, Barcelona</p>
-      <h1 class="hero-title">HOP<span class="acc">TOWN</span></h1>
-      <p class="hero-tag">Aquí no se sirve lo de siempre.</p>
+      <h1 class="hero-title">Aquí no se sirve <em>lo de siempre.</em></h1>
       <p class="hero-desc">Más de 20 estilos artesanales en grifo, tapas caseras, terraza en la calle Sicília y las pantallas siempre encendidas para el partido.</p>
       <div class="hero-actions">
-        <a href="#carta" class="btn btn-amber">Ver la carta</a>
+        <a href="#carta"     class="btn btn-amber">Ver la carta</a>
         <a href="#ubicacion" class="btn btn-outline">Cómo llegar</a>
       </div>
     </div>
   </div>
+
+  <!-- Stats strip -->
   <div class="hero-stats" role="list">
     <div class="stat" role="listitem">
       <span class="stat-n">4.7 ★</span>
@@ -336,10 +354,6 @@ footer{background:#0F0D0B;color:#E8E2D6;padding-block:4rem 2rem}
       <span class="stat-n">7/7</span>
       <span class="stat-l">Abiertos cada día</span>
     </div>
-  </div>
-  <div class="scroll-hint" aria-hidden="true">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
   </div>
 </section>
 
@@ -376,7 +390,7 @@ footer{background:#0F0D0B;color:#E8E2D6;padding-block:4rem 2rem}
         </div>
         <div class="feat">
           <div class="feat-icon">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18M3 6h18M3 18h18" stroke-width="1.75"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           </div>
           <div>
             <p class="feat-title">Terraza en la calle Sicília</p>
@@ -402,96 +416,23 @@ footer{background:#0F0D0B;color:#E8E2D6;padding-block:4rem 2rem}
       <button class="ctab on" role="tab" aria-selected="true"  data-tab="tab-cervezas" id="t1">Cervezas de grifo</button>
       <button class="ctab"    role="tab" aria-selected="false" data-tab="tab-tapas"    id="t2">Tapas &amp; Comida</button>
     </div>
-
-    <!-- Cervezas -->
     <div class="cpanel on" id="tab-cervezas" role="tabpanel" aria-labelledby="t1">
-      <div class="card">
-        <span class="card-badge">IPA</span>
-        <p class="card-name">Hop Town IPA</p>
-        <p class="card-meta">5.8% ABV · Lupulada, cítrica</p>
-        <p class="card-desc">Nuestra firma. Amargor redondo, final floral y un retrogusto a pomelo que no cansa. La pides una vez y repites.</p>
-        <span class="card-price">€4.50</span>
-      </div>
-      <div class="card">
-        <span class="card-badge">Rubia</span>
-        <p class="card-name">Eixample Blonde</p>
-        <p class="card-meta">4.5% ABV · Suave, equilibrada</p>
-        <p class="card-desc">La que le pides a alguien que dice que no le gusta la cerveza. Suave, fresca y muy traidora. Fácil de beber, difícil de dejar.</p>
-        <span class="card-price">€4.00</span>
-      </div>
-      <div class="card">
-        <span class="card-badge">Trigo</span>
-        <p class="card-name">Barceloneta Wheat</p>
-        <p class="card-meta">4.2% ABV · Afrutada, fresca</p>
-        <p class="card-desc">Toque de naranja y un punto de levadura frutal. La cerveza de terraza por excelencia. Bien fría, en un buen vaso.</p>
-        <span class="card-price">€4.00</span>
-      </div>
-      <div class="card">
-        <span class="card-badge">Stout</span>
-        <p class="card-name">Gòtic Stout</p>
-        <p class="card-meta">5.5% ABV · Café, chocolate</p>
-        <p class="card-desc">Oscura y reconfortante. Para los días grises o para quien quiere algo diferente. Notas de café tostado y chocolate amargo.</p>
-        <span class="card-price">€4.50</span>
-      </div>
-      <div class="card">
-        <span class="card-badge">Saison</span>
-        <p class="card-name">Saison del Mercat</p>
-        <p class="card-meta">6.2% ABV · Especiada, seca · Temporada</p>
-        <p class="card-desc">Belga de temporada, especiada y con final seco. Pregunta si queda: cuando se acaba, se acaba hasta el año que viene.</p>
-        <span class="card-price">€5.00</span>
-      </div>
-      <div class="card">
-        <span class="card-badge">DIPA</span>
-        <p class="card-name">Double IPA Raval</p>
-        <p class="card-meta">8.0% ABV · Intensa, sin concesiones</p>
-        <p class="card-desc">Solo para valientes. Lupulada al máximo, amarga y compleja. Si la pides, te la terminamos. No hay negociación.</p>
-        <span class="card-price">€5.50</span>
-      </div>
+      <div class="card"><span class="card-badge">IPA</span><p class="card-name">Hop Town IPA</p><p class="card-meta">5.8% ABV · Lupulada, cítrica</p><p class="card-desc">Nuestra firma. Amargor redondo, final floral y un retrogusto a pomelo que no cansa. La pides una vez y repites.</p><span class="card-price">€4.50</span></div>
+      <div class="card"><span class="card-badge">Rubia</span><p class="card-name">Eixample Blonde</p><p class="card-meta">4.5% ABV · Suave, equilibrada</p><p class="card-desc">La que le pides a alguien que dice que no le gusta la cerveza. Suave, fresca y muy traidora. Fácil de beber, difícil de dejar.</p><span class="card-price">€4.00</span></div>
+      <div class="card"><span class="card-badge">Trigo</span><p class="card-name">Barceloneta Wheat</p><p class="card-meta">4.2% ABV · Afrutada, fresca</p><p class="card-desc">Toque de naranja y un punto de levadura frutal. La cerveza de terraza por excelencia. Bien fría, en un buen vaso.</p><span class="card-price">€4.00</span></div>
+      <div class="card"><span class="card-badge">Stout</span><p class="card-name">Gòtic Stout</p><p class="card-meta">5.5% ABV · Café, chocolate</p><p class="card-desc">Oscura y reconfortante. Para los días grises o para quien quiere algo diferente. Notas de café tostado y chocolate amargo.</p><span class="card-price">€4.50</span></div>
+      <div class="card"><span class="card-badge">Saison</span><p class="card-name">Saison del Mercat</p><p class="card-meta">6.2% ABV · Especiada, seca · Temporada</p><p class="card-desc">Belga de temporada, especiada y con final seco. Pregunta si queda: cuando se acaba, se acaba hasta el año que viene.</p><span class="card-price">€5.00</span></div>
+      <div class="card"><span class="card-badge">DIPA</span><p class="card-name">Double IPA Raval</p><p class="card-meta">8.0% ABV · Intensa, sin concesiones</p><p class="card-desc">Solo para valientes. Lupulada al máximo, amarga y compleja. Si la pides, te la terminamos. No hay negociación.</p><span class="card-price">€5.50</span></div>
     </div>
-
-    <!-- Tapas -->
     <div class="cpanel" id="tab-tapas" role="tabpanel" aria-labelledby="t2">
-      <div class="card hop-card">
-        <span class="card-badge g">Recomendado</span>
-        <p class="card-name">Tacos de carne (x3)</p>
-        <p class="card-meta">Ternera · Tomate · Cebolla fresca</p>
-        <p class="card-desc">Con tomate y cebolla frescos, cilantro y salsa de la casa. Un clásico que no falta en la carta porque no puede faltar. Mejor con una IPA.</p>
-        <span class="card-price">€9.00</span>
-      </div>
-      <div class="card hop-card">
-        <span class="card-badge g">Caseras</span>
-        <p class="card-name">Empanadillas de carne (x4)</p>
-        <p class="card-meta">Hechas en casa · Crujientes</p>
-        <p class="card-desc">Crujientes por fuera, jugosas por dentro. Las hacemos nosotros, y se nota. Más de uno ha venido solo por ellas.</p>
-        <span class="card-price">€8.00</span>
-      </div>
-      <div class="card">
-        <p class="card-name">Patatas bravas</p>
-        <p class="card-meta">Con salsa brava picante y alioli</p>
-        <p class="card-desc">Las de siempre, bien hechas. Crujientes, con salsa brava de verdad y alioli de la casa. Sin trampa ni cartón.</p>
-        <span class="card-price">€5.50</span>
-      </div>
-      <div class="card">
-        <p class="card-name">Tabla ibérica</p>
-        <p class="card-meta">Jamón · Salchichón · Queso curado</p>
-        <p class="card-desc">Selección de embutido ibérico con pan con tomate. Para compartir, para quedarse un rato más, para justificar otra ronda.</p>
-        <span class="card-price">€14.00</span>
-      </div>
-      <div class="card">
-        <p class="card-name">Croquetas del día (x4)</p>
-        <p class="card-meta">Pregunta cuáles son hoy</p>
-        <p class="card-desc">Varía según el día y el humor de cocina. Pregunta a Marcello cuáles son: nunca defrauda. Caseras, siempre.</p>
-        <span class="card-price">€7.00</span>
-      </div>
-      <div class="card">
-        <p class="card-name">Nachos gratinados</p>
-        <p class="card-meta">Jalapeños · Guacamole · Sour cream</p>
-        <p class="card-desc">Con jalapeños encurtidos, guacamole fresco y sour cream. Imprescindibles para el partido. Para compartir (o no).</p>
-        <span class="card-price">€8.50</span>
-      </div>
+      <div class="card hop-card"><span class="card-badge g">Recomendado</span><p class="card-name">Tacos de carne (x3)</p><p class="card-meta">Ternera · Tomate · Cebolla fresca</p><p class="card-desc">Con tomate y cebolla frescos, cilantro y salsa de la casa. Un clásico que no falta en la carta porque no puede faltar.</p><span class="card-price">€9.00</span></div>
+      <div class="card hop-card"><span class="card-badge g">Caseras</span><p class="card-name">Empanadillas de carne (x4)</p><p class="card-meta">Hechas en casa · Crujientes</p><p class="card-desc">Crujientes por fuera, jugosas por dentro. Las hacemos nosotros, y se nota. Más de uno ha venido solo por ellas.</p><span class="card-price">€8.00</span></div>
+      <div class="card"><p class="card-name">Patatas bravas</p><p class="card-meta">Con salsa brava picante y alioli</p><p class="card-desc">Las de siempre, bien hechas. Crujientes, con salsa brava de verdad y alioli de la casa. Sin trampa ni cartón.</p><span class="card-price">€5.50</span></div>
+      <div class="card"><p class="card-name">Tabla ibérica</p><p class="card-meta">Jamón · Salchichón · Queso curado</p><p class="card-desc">Selección de embutido ibérico con pan con tomate. Para compartir, para quedarse un rato más, para justificar otra ronda.</p><span class="card-price">€14.00</span></div>
+      <div class="card"><p class="card-name">Croquetas del día (x4)</p><p class="card-meta">Pregunta cuáles son hoy</p><p class="card-desc">Varía según el día y el humor de cocina. Pregunta a Marcello cuáles son: nunca defrauda. Caseras, siempre.</p><span class="card-price">€7.00</span></div>
+      <div class="card"><p class="card-name">Nachos gratinados</p><p class="card-meta">Jalapeños · Guacamole · Sour cream</p><p class="card-desc">Con jalapeños encurtidos, guacamole fresco y sour cream. Imprescindibles para el partido. Para compartir (o no).</p><span class="card-price">€8.50</span></div>
     </div>
-
-    <p class="carta-note">Carta sujeta a disponibilidad de producto · Avísanos si tienes alguna alergia · Precio del grifo indicado por caña</p>
+    <p class="carta-note">Carta sujeta a disponibilidad · Avísanos si tienes alguna alergia · Precio indicado por caña</p>
   </div>
 </section>
 
@@ -504,32 +445,15 @@ footer{background:#0F0D0B;color:#E8E2D6;padding-block:4rem 2rem}
         <h2 class="ev-title">El deporte sabe mejor <em>con una pinta</em> en la mano.</h2>
         <p class="ev-body">Dos pantallas HD, buen sonido, y el ambiente justo: animado pero sin perder de vista el partido. Fútbol, tenis, y lo que la temporada traiga. Si hay partido importante, aquí se ve.</p>
         <div class="sport-pills">
-          <div class="sport-pill">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-            Fútbol · Champions &amp; Liga
-          </div>
-          <div class="sport-pill">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M6.5 17.5c3-3 9-3 9-9M17.5 6.5c-3 3-9 3-9 9"/></svg>
-            Tenis · Grand Slams
-          </div>
-          <div class="sport-pill">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
-            2 pantallas HD
-          </div>
+          <div class="sport-pill"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>Fútbol · Champions &amp; Liga</div>
+          <div class="sport-pill"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M6.5 17.5c3-3 9-3 9-9M17.5 6.5c-3 3-9 3-9 9"/></svg>Tenis · Grand Slams</div>
+          <div class="sport-pill"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>2 pantallas HD</div>
         </div>
         <a href="https://wa.me/34692073323" class="btn btn-white" target="_blank" rel="noopener">Reserva para el partido</a>
       </div>
       <div class="screens" aria-hidden="true" data-a data-d="2">
-        <div class="screen-wrap">
-          <div class="screen-box"><span class="screen-lbl">Pantalla 2</span></div>
-          <div class="screen-stand"></div>
-          <div class="screen-foot"></div>
-        </div>
-        <div class="screen-wrap">
-          <div class="screen-box"><span class="screen-lbl">Pantalla principal</span></div>
-          <div class="screen-stand"></div>
-          <div class="screen-foot"></div>
-        </div>
+        <div class="screen-wrap"><div class="screen-box"><span class="screen-lbl">Pantalla 2</span></div><div class="screen-stand"></div><div class="screen-foot"></div></div>
+        <div class="screen-wrap"><div class="screen-box"><span class="screen-lbl">Pantalla principal</span></div><div class="screen-stand"></div><div class="screen-foot"></div></div>
       </div>
     </div>
   </div>
@@ -539,10 +463,7 @@ footer{background:#0F0D0B;color:#E8E2D6;padding-block:4rem 2rem}
 <section id="resenas">
   <div class="wrap">
     <div class="resenas-top" data-a>
-      <div>
-        <p class="eyebrow">Lo que dicen</p>
-        <h2 class="stitle">4.7 sobre 5 en Google</h2>
-      </div>
+      <div><p class="eyebrow">Lo que dicen</p><h2 class="stitle">4.7 sobre 5 en Google</h2></div>
       <div class="rating-block">
         <span class="rating-num">4.7</span>
         <div class="rating-right">
@@ -553,50 +474,10 @@ footer{background:#0F0D0B;color:#E8E2D6;padding-block:4rem 2rem}
       </div>
     </div>
     <div class="resenas-grid">
-      <div class="rc" data-a data-d="1">
-        <div class="rc-stars" aria-label="5 estrellas">★★★★★</div>
-        <p class="rc-text">"Llevábamos meses buscando un bar con buena cerveza artesanal en el Eixample y lo encontramos. Hop Town tiene esa vibra de sitio auténtico que ya no se estila. Marcello y el equipo te hacen sentir en casa desde la primera visita."</p>
-        <div class="rc-footer">
-          <div class="rc-avatar" aria-hidden="true">CR</div>
-          <div>
-            <p class="rc-name">Cristina R.</p>
-            <p class="rc-date">Hace 2 semanas</p>
-          </div>
-        </div>
-      </div>
-      <div class="rc" data-a data-d="2">
-        <div class="rc-stars" aria-label="5 estrellas">★★★★★</div>
-        <p class="rc-text">"El mejor sitio para ver el fútbol sin dramas. Buena pantalla, buen ambiente, y la cerveza artesanal está para repetir. Los jueves por la noche hay un ambiente genial. Ya es nuestro local fijo de Champions."</p>
-        <div class="rc-footer">
-          <div class="rc-avatar" aria-hidden="true">DM</div>
-          <div>
-            <p class="rc-name">David M.</p>
-            <p class="rc-date">Hace 1 mes</p>
-          </div>
-        </div>
-      </div>
-      <div class="rc" data-a data-d="3">
-        <div class="rc-stars" aria-label="5 estrellas">★★★★★</div>
-        <p class="rc-text">"Los tacos de carne son adictivos, no exagero. Y las empanadillas caseras... Vine a tomar algo rápido y me quedé casi tres horas. Eso dice mucho del sitio y de la gente que hay detrás de la barra."</p>
-        <div class="rc-footer">
-          <div class="rc-avatar" aria-hidden="true">AF</div>
-          <div>
-            <p class="rc-name">Alejandro F.</p>
-            <p class="rc-date">Hace 3 semanas</p>
-          </div>
-        </div>
-      </div>
-      <div class="rc" data-a data-d="4">
-        <div class="rc-stars" aria-label="5 estrellas">★★★★★</div>
-        <p class="rc-text">"La terraza en verano es un lujo en el barrio. Buena cerveza, precio razonable, y los camareros siempre atentos sin agobiarte. Ya es nuestro local de los viernes. Muy recomendable para quienes buscan algo diferente."</p>
-        <div class="rc-footer">
-          <div class="rc-avatar" aria-hidden="true">NJ</div>
-          <div>
-            <p class="rc-name">Neus &amp; Jordi</p>
-            <p class="rc-date">Hace 1 mes</p>
-          </div>
-        </div>
-      </div>
+      <div class="rc" data-a data-d="1"><div class="rc-stars" aria-label="5 estrellas">★★★★★</div><p class="rc-text">"Llevábamos meses buscando un bar con buena cerveza artesanal en el Eixample y lo encontramos. Hop Town tiene esa vibra de sitio auténtico que ya no se estila. Marcello y el equipo te hacen sentir en casa desde la primera visita."</p><div class="rc-footer"><div class="rc-avatar" aria-hidden="true">CR</div><div><p class="rc-name">Cristina R.</p><p class="rc-date">Hace 2 semanas</p></div></div></div>
+      <div class="rc" data-a data-d="2"><div class="rc-stars" aria-label="5 estrellas">★★★★★</div><p class="rc-text">"El mejor sitio para ver el fútbol sin dramas. Buena pantalla, buen ambiente, y la cerveza artesanal está para repetir. Los jueves por la noche hay un ambiente genial. Ya es nuestro local fijo de Champions."</p><div class="rc-footer"><div class="rc-avatar" aria-hidden="true">DM</div><div><p class="rc-name">David M.</p><p class="rc-date">Hace 1 mes</p></div></div></div>
+      <div class="rc" data-a data-d="3"><div class="rc-stars" aria-label="5 estrellas">★★★★★</div><p class="rc-text">"Los tacos de carne son adictivos, no exagero. Y las empanadillas caseras... Vine a tomar algo rápido y me quedé casi tres horas. Eso dice mucho del sitio y de la gente que hay detrás de la barra."</p><div class="rc-footer"><div class="rc-avatar" aria-hidden="true">AF</div><div><p class="rc-name">Alejandro F.</p><p class="rc-date">Hace 3 semanas</p></div></div></div>
+      <div class="rc" data-a data-d="4"><div class="rc-stars" aria-label="5 estrellas">★★★★★</div><p class="rc-text">"La terraza en verano es un lujo en el barrio. Buena cerveza, precio razonable, y los camareros siempre atentos sin agobiarte. Ya es nuestro local de los viernes. Muy recomendable para quienes buscan algo diferente."</p><div class="rc-footer"><div class="rc-avatar" aria-hidden="true">NJ</div><div><p class="rc-name">Neus &amp; Jordi</p><p class="rc-date">Hace 1 mes</p></div></div></div>
     </div>
   </div>
 </section>
@@ -604,20 +485,11 @@ footer{background:#0F0D0B;color:#E8E2D6;padding-block:4rem 2rem}
 <!-- ░░ UBICACIÓN ░░ -->
 <section id="ubicacion">
   <div class="wrap">
-    <div data-a style="margin-bottom:2.5rem">
-      <p class="eyebrow">Dónde estamos</p>
-      <h2 class="stitle">Encuéntranos en el Eixample</h2>
-    </div>
+    <div data-a style="margin-bottom:2.5rem"><p class="eyebrow">Dónde estamos</p><h2 class="stitle">Encuéntranos en el Eixample</h2></div>
     <div class="ubi-grid">
       <div data-a data-d="1">
         <div class="map-wrap">
-          <iframe
-            src="https://maps.google.com/maps?q=41.3998189,2.1756212&z=17&output=embed&hl=es"
-            title="Ubicación de Hop Town – C. de Sicília, 181, Barcelona"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            allowfullscreen>
-          </iframe>
+          <iframe src="https://maps.google.com/maps?q=41.3998189,2.1756212&z=17&output=embed&hl=es" title="Ubicación de Hop Town – C. de Sicília, 181, Barcelona" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
         </div>
         <a href="https://maps.google.com/?q=41.3998189,2.1756212" class="map-link" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -625,35 +497,22 @@ footer{background:#0F0D0B;color:#E8E2D6;padding-block:4rem 2rem}
         </a>
       </div>
       <div data-a data-d="2">
-        <div class="info-block">
-          <p class="info-label">Dirección</p>
-          <p class="info-val">C. de Sicília, 181, Local 3<br>Eixample, 08013 Barcelona</p>
-        </div>
-        <div class="info-block">
-          <p class="info-label">Teléfono</p>
-          <p class="info-val"><a href="tel:+34692073323">+34 692 07 33 23</a></p>
-        </div>
+        <div class="info-block"><p class="info-label">Dirección</p><p class="info-val">C. de Sicília, 181, Local 3<br>Eixample, 08013 Barcelona</p></div>
+        <div class="info-block"><p class="info-label">Teléfono</p><p class="info-val"><a href="tel:+34692073323">+34 692 07 33 23</a></p></div>
         <div class="info-block">
           <p class="info-label">Horario</p>
-          <table class="horario" aria-label="Horario de apertura">
-            <tbody>
-              <tr data-day="lunes">    <td>Lunes</td>    <td>8:00 – 2:00</td></tr>
-              <tr data-day="martes">   <td>Martes</td>   <td>8:00 – 2:00</td></tr>
-              <tr data-day="miercoles"><td>Miércoles</td><td>8:00 – 2:00</td></tr>
-              <tr data-day="jueves">   <td>Jueves</td>   <td>8:00 – 3:00</td></tr>
-              <tr data-day="viernes">  <td>Viernes</td>  <td>8:00 – 3:00</td></tr>
-              <tr data-day="sabado">   <td>Sábado</td>   <td>8:00 – 3:00</td></tr>
-              <tr data-day="domingo">  <td>Domingo</td>  <td>8:00 – 2:00</td></tr>
-            </tbody>
-          </table>
+          <table class="horario" aria-label="Horario de apertura"><tbody>
+            <tr data-day="lunes">     <td>Lunes</td>    <td>8:00 – 2:00</td></tr>
+            <tr data-day="martes">    <td>Martes</td>   <td>8:00 – 2:00</td></tr>
+            <tr data-day="miercoles"> <td>Miércoles</td><td>8:00 – 2:00</td></tr>
+            <tr data-day="jueves">    <td>Jueves</td>   <td>8:00 – 3:00</td></tr>
+            <tr data-day="viernes">   <td>Viernes</td>  <td>8:00 – 3:00</td></tr>
+            <tr data-day="sabado">    <td>Sábado</td>   <td>8:00 – 3:00</td></tr>
+            <tr data-day="domingo">   <td>Domingo</td>  <td>8:00 – 2:00</td></tr>
+          </tbody></table>
         </div>
-        <div class="info-block">
-          <p class="info-label">Precio</p>
-          <p class="info-val">€€ · Gama media</p>
-        </div>
-        <div style="margin-top:1.5rem">
-          <a href="https://wa.me/34692073323" class="btn btn-amber" target="_blank" rel="noopener">Reservar por WhatsApp</a>
-        </div>
+        <div class="info-block"><p class="info-label">Precio</p><p class="info-val">€€ · Gama media</p></div>
+        <div style="margin-top:1.5rem"><a href="https://wa.me/34692073323" class="btn btn-amber" target="_blank" rel="noopener">Reservar por WhatsApp</a></div>
       </div>
     </div>
   </div>
@@ -664,18 +523,15 @@ footer{background:#0F0D0B;color:#E8E2D6;padding-block:4rem 2rem}
   <div class="wrap">
     <div class="ft-grid">
       <div>
-        <a href="#inicio" class="ft-logo">HOP<span class="dot">.</span>TOWN</a>
+        <a href="#inicio" class="ft-logo">
+          <img src="assets/images/logo.png" alt="Hop Town" class="ft-logo-img">
+          <span class="ft-logo-name">HOP<span class="dot">.</span>TOWN</span>
+        </a>
         <p class="ft-tag">Bar de cervezas artesanales en el Eixample de Barcelona. Cervezas de verdad, tapas caseras y ambiente para quedarse.</p>
         <div class="social" aria-label="Redes sociales">
-          <a href="#" class="soc" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          </a>
-          <a href="#" class="soc" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          </a>
-          <a href="https://wa.me/34692073323" class="soc" aria-label="WhatsApp" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.523 5.843L.057 23.215a.75.75 0 0 0 .928.928l5.372-1.466A11.942 11.942 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.73 9.73 0 0 1-4.952-1.352l-.355-.212-3.686 1.006 1.006-3.687-.213-.354A9.73 9.73 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
-          </a>
+          <a href="#" class="soc" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" class="soc" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://wa.me/34692073323" class="soc" aria-label="WhatsApp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.523 5.843L.057 23.215a.75.75 0 0 0 .928.928l5.372-1.466A11.942 11.942 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
         </div>
       </div>
       <div>
@@ -692,30 +548,18 @@ footer{background:#0F0D0B;color:#E8E2D6;padding-block:4rem 2rem}
         <p class="ft-col-t">Horario</p>
         <div class="ft-hours">
           <span>Lun – Mié &amp; Dom</span><br>
-          <strong style="color:#E8E2D6">8:00 – 2:00</strong><br><br>
+          <strong style="color:#7AAF86">8:00 – 2:00</strong><br><br>
           <span>Jue – Sáb</span><br>
-          <strong style="color:#E8E2D6">8:00 – 3:00</strong>
+          <strong style="color:#7AAF86">8:00 – 3:00</strong>
         </div>
       </div>
       <div>
         <p class="ft-col-t">Contacto</p>
         <div class="ft-contact">
-          <a href="tel:+34692073323">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.29h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.93a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            +34 692 07 33 23
-          </a>
-          <a href="https://wa.me/34692073323" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" stroke="none" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.523 5.843L.057 23.215a.75.75 0 0 0 .928.928l5.372-1.466A11.942 11.942 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.73 9.73 0 0 1-4.952-1.352l-.355-.212-3.686 1.006 1.006-3.687-.213-.354A9.73 9.73 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
-            WhatsApp
-          </a>
-          <a href="mailto:info@hoptown.bar">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            info@hoptown.bar
-          </a>
-          <a href="https://maps.google.com/?q=41.3998189,2.1756212" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            C. de Sicília, 181, Local 3
-          </a>
+          <a href="tel:+34692073323"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.29h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.93a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+34 692 07 33 23</a>
+          <a href="https://wa.me/34692073323" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" stroke="none" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.523 5.843L.057 23.215a.75.75 0 0 0 .928.928l5.372-1.466A11.942 11.942 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>WhatsApp</a>
+          <a href="mailto:info@hoptown.bar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@hoptown.bar</a>
+          <a href="https://maps.google.com/?q=41.3998189,2.1756212" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>C. de Sicília, 181, Local 3</a>
         </div>
       </div>
     </div>
@@ -732,18 +576,9 @@ const hdr = document.getElementById('hdr');
 window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
 
 /* Mobile nav */
-const ham  = document.getElementById('ham');
-const mnav = document.getElementById('mnav');
-function openNav() {
-  mnav.classList.add('open'); mnav.setAttribute('aria-hidden','false');
-  ham.setAttribute('aria-expanded','true'); ham.setAttribute('aria-label','Cerrar menú');
-  document.body.style.overflow = 'hidden';
-}
-function closeNav() {
-  mnav.classList.remove('open'); mnav.setAttribute('aria-hidden','true');
-  ham.setAttribute('aria-expanded','false'); ham.setAttribute('aria-label','Abrir menú');
-  document.body.style.overflow = '';
-}
+const ham = document.getElementById('ham'), mnav = document.getElementById('mnav');
+function openNav()  { mnav.classList.add('open'); mnav.setAttribute('aria-hidden','false'); ham.setAttribute('aria-expanded','true'); ham.setAttribute('aria-label','Cerrar menú'); document.body.style.overflow='hidden'; }
+function closeNav() { mnav.classList.remove('open'); mnav.setAttribute('aria-hidden','true'); ham.setAttribute('aria-expanded','false'); ham.setAttribute('aria-label','Abrir menú'); document.body.style.overflow=''; }
 ham.addEventListener('click', () => mnav.classList.contains('open') ? closeNav() : openNav());
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
 
@@ -760,7 +595,7 @@ document.querySelectorAll('.ctab').forEach(tab => {
 /* Scroll animations */
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+}, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
 document.querySelectorAll('[data-a]').forEach(el => io.observe(el));
 
 /* Highlight today in horario */
@@ -773,17 +608,14 @@ if (todayRow) todayRow.classList.add('hoy');
   const canvas = document.getElementById('hero-canvas');
   const ctx = canvas.getContext('2d');
   let B = [], W = 0, H = 0, raf;
-  const dark = () => document.documentElement.getAttribute('data-theme') === 'dark' ||
-    (!document.documentElement.getAttribute('data-theme') && matchMedia('(prefers-color-scheme:dark)').matches);
   function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
-  function mkb(rand) { return { x: Math.random()*W, y: rand ? Math.random()*H : H+10, r: Math.random()*2.5+.8, s: Math.random()*.5+.2, d: (Math.random()-.5)*.25, a: Math.random()*.2+.05 }; }
-  function init() { B = Array.from({length:90}, () => mkb(true)); }
+  function mkb(rand) { return { x: Math.random()*W, y: rand ? Math.random()*H : H+10, r: Math.random()*2.5+.8, s: Math.random()*.45+.2, d: (Math.random()-.5)*.25, a: Math.random()*.18+.04 }; }
+  function init() { B = Array.from({length:100}, () => mkb(true)); }
   function tick() {
     ctx.clearRect(0,0,W,H);
-    const rgb = dark() ? '201,148,58' : '181,131,46';
     for (const b of B) {
       ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, Math.PI*2);
-      ctx.strokeStyle = `rgba(${rgb},${b.a})`; ctx.lineWidth = .7; ctx.stroke();
+      ctx.strokeStyle = `rgba(201,148,58,${b.a})`; ctx.lineWidth = .7; ctx.stroke();
       b.y -= b.s; b.x += b.d;
       if (b.y < -15) Object.assign(b, mkb(false));
     }
